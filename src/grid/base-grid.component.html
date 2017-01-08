@@ -1,0 +1,54 @@
+<div [style]="getStyle()" className="angular-grid-Grid">
+    <header
+        #header 
+        [columnMetrics]="columnMetrics"
+        [cellMetaData]="cellMetaData"
+        [height]="rowHeight"
+        [totalWidth]="totalWidth"
+        [headerRows]="headerRows"
+        [sortColumn]="sortColumn"
+        [sortDirection]="sortDirection"
+        [draggableHeaderCell]="draggableHeaderCell"
+        [onColumnResize]="onColumnResize()"
+        [onSort]="onSort()"
+        [onScroll]="onHeaderScroll()"
+        [getValidFilterValues]="getValidFilterValues()">
+    </header>
+    <div *ngIf="hasRows(); else emptyView">
+         <div #viewPortContainer 
+              tabIndex="0" 
+              (keyDown)="onViewportKeydown()" 
+              (keyU)="onViewportKeyup()" 
+              (dblClick="onViewportDoubleClick()"   
+              (dragStart)="onViewportDragStart()" 
+              (dragEnd)="onViewportDragEnd()">
+              <Viewport
+                  #viewport
+                  [rowKey]="rowKey"
+                  [width]="columnMetrics.width"
+                  [rowHeight]="rowHeight"
+                  [rowRenderer]="rowRenderer"
+                  [rowGetter]="rowGetter"
+                  [rowsCount]="rowsCount"
+                  [selectedRows]="selectedRows"
+                  [expandedRows]="expandedRows"
+                  [columnMetrics]="columnMetrics"
+                  [totalWidth]="totalWidth"
+                  [cellMetaData]="cellMetaData"
+                  [rowOffsetHeight]="rowOffsetHeight || rowHeight * headerRows.length"
+                  [minHeight]="minHeight"
+                  [rowScrollTimeout]="rowScrollTimeout"
+                  [contextMenu]="contextMenu"
+                  [rowSelection]="rowSelection"
+                  [getSubRowDetails]="getSubRowDetails()"
+                  [rowGroupRenderer]="rowGroupRenderer"
+                  [overScan]="overScan"
+                  (onScroll)="onScroll()"
+                  (onRows)="onRows()">
+              </Viewport>
+    </div>
+    <div #emptyView
+        className="react-grid-Empty">
+        Empty View
+    </div>
+</div>

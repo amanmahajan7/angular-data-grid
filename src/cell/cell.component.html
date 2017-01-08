@@ -1,0 +1,10 @@
+<ng-container>
+    <div [ngStyle]="getStyle()" [ngClass]="getCellClass()" (click)="onCellClick($event)" (dblclick)="onCellDoubleClick($event)" (contextmenu)="onCellContextMenu($event)">
+        <div class="angular-grid-cell__value">
+            <span>
+                <cell-expander *ngIf="canExpand()" [treeDepth]="expandableOptions.treeDepth"></cell-expander>
+                <simple-cell-formatter [value]="value"></simple-cell-formatter>
+            </span>
+        </div>
+    </div>
+</ng-container>

@@ -15,26 +15,31 @@
   },
   "homepage": "https://github.com/amanmahajan7/angular-data-grid#readme",
   "dependencies": {
-    "@angular/common": "~2.3.1",
-    "@angular/compiler": "~2.3.1",
-    "@angular/core": "~2.3.1",
-    "@angular/forms": "~2.3.1",
-    "@angular/http": "~2.3.1",
-    "@angular/platform-browser": "~2.3.1",
-    "@angular/platform-browser-dynamic": "~2.3.1",
-    "@angular/router": "~3.3.1",
+    "@angular/common": "~4.0.0-beta.2",
+    "@angular/compiler": "~4.0.0-beta.2",
+    "@angular/core": "~4.0.0-beta.2",
+    "@angular/forms": "~4.0.0-beta.2",
+    "@angular/http": "~4.0.0-beta.2",
+    "@angular/platform-browser": "~4.0.0-beta.2",
+    "@angular/platform-browser-dynamic": "~4.0.0-beta.2",
+    "@angular/router": "~4.0.0-beta.2",
+    "@types/classnames": "0.0.32",
+    "@types/lodash": "^4.14.43",
+    "classnames": "^2.2.5",
     "core-js": "^2.4.1",
+    "lodash": "^4.17.2",
     "reflect-metadata": "^0.1.8",
-    "rxjs": "^5.0.0-rc.4",
+    "rxjs": "^5.0.3",
     "systemjs": "^0.19.41",
-    "zone.js": "^0.7.2"
+    "zone.js": "^0.7.4"
   },
   "devDependencies": {
-    "@angular/compiler-cli": "^2.3.1",
-    "@angular/platform-server": "^2.3.1",
+    "@angular/compiler-cli": "^4.0.0-beta.2",
+    "@angular/language-service": "^4.0.0-beta.2",
+    "@angular/platform-server": "^4.0.0-beta.2",
     "codelyzer": "^2.0.0-beta.3",
     "tslint": "^4.0.0",
     "typescript": "^2.1.4",
-    "webpack": "^2.2.0-rc.0"
+    "webpack": "^2.2.0-rc.3"
   }
 }
