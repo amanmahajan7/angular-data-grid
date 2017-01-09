@@ -1,0 +1,7 @@
+<div 
+    style="cursor:'pointer'"
+    [ngClass]="getClass()"
+    (click)="onClick($event)">
+    {{column.name}}
+    <span className="pull-right">{{getSortByText()}</span>
+</div>

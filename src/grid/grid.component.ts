@@ -3,8 +3,8 @@ import { Component, Input, Output, ChangeDetectionStrategy } from '@angular/core
 import { CellMetadata, SortDirection } from '../shared';
 
 @Component({
-    selector: 'base-grid',
-    templateUrl: './base-grid.component.html',
+    selector: 'grid',
+    templateUrl: './grid.component.html',
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class BaseGridComponent {

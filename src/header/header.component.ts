@@ -1,4 +1,4 @@
-import { Component, Input, Output, ChangeDetectionStrategy } from '@angular/core';
+import { Component, Input, Output, ChangeDetectionStrategy, OnChanges } from '@angular/core';
 
 import { SortDirection, CellMetadata } from '../shared';
 
@@ -7,13 +7,13 @@ import { SortDirection, CellMetadata } from '../shared';
     templateUrl: './header.component.html',
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class HeaderComponent {
+export class HeaderComponent implements OnChanges {
     @Input() columnMetrics: { width: number, columns: any };
     @Input() totalWidth: number | string;
     @Input() height: number;
     @Input() headerRows: any[];
     @Input() sortColumn: string;
-    @Input() sortDirection: string;
+    @Input() sortDirection: SortDirection;
     @Input() onSort: Function;
     // @Input() onColumnResize: Function;
     @Input() onScroll: Function;
@@ -22,6 +22,10 @@ export class HeaderComponent {
     @Input() cellMetaData: CellMetadata
 
     private resizing: boolean = false;
+
+    ngOnChanges(): void {
+
+    }
 
     onColumnResize(): void {
 
@@ -43,12 +47,11 @@ export class HeaderComponent {
 
     }
 
-    getCombinedHeaderHeights(): void {
-
-    }
-
-    getStyle(): void {
-
+    getStyle(): { position: string; height: number } {
+        return {
+            position: 'relative',
+            height: this.getCombinedHeaderHeights()
+        };
     }
 
     getHeaderClass(): Object {
@@ -68,5 +71,18 @@ export class HeaderComponent {
 
     onHeaderClick(): void {
 
+    }
+
+    private getCombinedHeaderHeights(until?: number): number {
+        let stopAt = this.headerRows.length;
+        if (typeof until !== 'undefined') {
+            stopAt = until;
+        }
+
+        let height = 0;
+        for (let index = 0; index < stopAt; index++) {
+            height += this.headerRows[index].height || this.height;
+        }
+        return height;
     }
 }

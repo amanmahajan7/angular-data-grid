@@ -1,6 +1,27 @@
-<div {...this.getKnownDivProps()} 
+<div 
     [ngStyle]="getStyle()" 
     [ngClass]="getHeaderClass()" 
     (click)="onHeaderClick()"> 
-    {headerRows}
+    <header-row *ngFor="let row of headerRows"
+        [key]={row.ref}
+        [ref]={row.ref}
+        [rowType]={row.rowType}
+        [style]={headerRowStyle}
+        [onColumnResize]={this.onColumnResize}
+        [onColumnResizeEnd]={this.onColumnResizeEnd}
+        [width]={columnMetrics.width}
+        [height]={row.height || this.props.height}
+        [columns]={columnMetrics.columns}
+        [resizing]={resizeColumn}
+        [draggableHeaderCell]={this.props.draggableHeaderCell}
+        [filterable]={row.filterable}
+        [onFilterChange]={row.onFilterChange}
+        [sortColumn]={this.props.sortColumn}
+        [sortDirection]={this.props.sortDirection}
+        [onSort]={this.props.onSort}
+        [onScroll]={this.props.onScroll}
+        [getValidFilterValues]={this.props.getValidFilterValues}
+        >
+        
+    </header-row>
 </div>
