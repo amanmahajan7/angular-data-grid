@@ -1,5 +1,9 @@
 <div [ngStyle]="getStyle()" [ngClass]="getClasses()">
     <ng-container *ngIf="column.resizable">
-        <resize-handle onDrag={this.onDrag} onDragStart={this.onDragStart} onDragEnd={this.onDragEnd}></resize-handle>
+        <resize-handle 
+            (drag)="onDrag($event)" 
+            (dragStart)="onDragStart($event)" 
+            (dragEnd)="onDragEnd($event)"
+        </resize-handle>
     </ng-container>
 </div>

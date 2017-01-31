@@ -6,20 +6,31 @@ import { fromEvent } from 'rxjs/observable/fromEvent';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/mergeMap';
 import 'rxjs/add/operator/takeUntil';
+import 'rxjs/add/operator/do';
+import 'rxjs/add/operator/last';
 
 @Component({
-    selector: 'draggable',
-    templateUrl: './draggable.component.html',
+    selector: 'resize-handle',
+    templateUrl: './resize-handle.component.html',
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class DraggableComponent implements OnInit, OnDestroy {
-    @Input() style: Object;
+export class ResizeHandleComponent {
+    @Output() dragStart: EventEmitter<any> = new EventEmitter();
+    @Output() dragEnd: EventEmitter<any> = new EventEmitter();
+    @Output() drag: EventEmitter<any> = new EventEmitter();
 
-    @Output() onDragStart: EventEmitter<any> = new EventEmitter();
-    @Output() onDragEnd: EventEmitter<any> = new EventEmitter();
-    @Output() onDrag: EventEmitter<any> = new EventEmitter();
+    get style(): Object {
+        return {
+            position: 'absolute',
+            top: 0,
+            right: 0,
+            width: 6,
+            height: '100%'
+        };
+    }
 
-    drag: Object = null;
+    // drag: Object = null;
+
     private mouseup: Observable<any>;
     private mousedown: Observable<any>;
     private mousemove: Observable<any>;
@@ -47,13 +58,14 @@ export class DraggableComponent implements OnInit, OnDestroy {
 
         this.mousedrag = this
             .mousedown
+            .do(() => this.dragStart.emit())
             .mergeMap((md: MouseEvent) => {
                 // Capture mouse down offset position
                 const startX = md.offsetX;
                 const startY = md.offsetY;
 
                 // Track mouse position differentials using mousemove until we hear a mouseup
-                return this
+                const mouseDragEvents = this
                     .mousemove
                     .map((mm: MouseEvent) => {
                         mm.preventDefault();
@@ -63,12 +75,20 @@ export class DraggableComponent implements OnInit, OnDestroy {
                             top: mm.clientY - startY
                         };
                         // Stop the drag when mouseup
-                    }).takeUntil(this.mouseup);
+                    })
+                    .takeUntil(this.mouseup);
+
+                // TODO: is there a nicer way to handle dragStart and dragEnd
+                mouseDragEvents
+                    .last()
+                    .subscribe(() => this.dragEnd.emit());
+
+                return mouseDragEvents;
             });
     }
 
     private handleDrag(): void {
         this.mousedragSubscription =
-            this.mousedown.subscribe((point: {}) => this.onDrag.emit(point));
+            this.mousedown.subscribe((coordinate: {}) => this.drag.emit(coordinate));
     }
-} 
+}
