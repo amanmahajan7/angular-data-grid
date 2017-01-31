@@ -7,7 +7,7 @@ import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/mergeMap';
 import 'rxjs/add/operator/takeUntil';
 import 'rxjs/add/operator/do';
-import 'rxjs/add/operator/last';
+import 'rxjs/add/operator/finally';
 
 @Component({
     selector: 'resize-handle',
@@ -65,7 +65,7 @@ export class ResizeHandleComponent {
                 const startY = md.offsetY;
 
                 // Track mouse position differentials using mousemove until we hear a mouseup
-                const mouseDragEvents = this
+                return this
                     .mousemove
                     .map((mm: MouseEvent) => {
                         mm.preventDefault();
@@ -76,14 +76,8 @@ export class ResizeHandleComponent {
                         };
                         // Stop the drag when mouseup
                     })
-                    .takeUntil(this.mouseup);
-
-                // TODO: is there a nicer way to handle dragStart and dragEnd
-                mouseDragEvents
-                    .last()
-                    .subscribe(() => this.dragEnd.emit());
-
-                return mouseDragEvents;
+                    .takeUntil(this.mouseup)
+                    .finally(() => this.dragEnd.emit());
             });
     }
 
