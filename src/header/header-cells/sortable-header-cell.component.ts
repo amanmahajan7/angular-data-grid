@@ -1,6 +1,6 @@
 import { Component, ChangeDetectionStrategy, Input, Output, EventEmitter } from '@angular/core';
 
-import { Column, SortDirection } from '../shared';
+import { Column, SortDirection } from '../../shared';
 
 @Component({
     selector: 'sortable-header-cell',
