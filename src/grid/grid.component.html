@@ -10,18 +10,18 @@
         [sortDirection]="sortDirection"
         [draggableHeaderCell]="draggableHeaderCell"
         [onColumnResize]="onColumnResize()"
-        [onSort]="onSort()"
-        [onScroll]="onHeaderScroll()"
-        [getValidFilterValues]="getValidFilterValues()">
+        [onSort]="onSort"
+        [onScroll]="onHeaderScroll"
+        [getValidFilterValues]="getValidFilterValues">
     </header>
     <div *ngIf="hasRows(); else emptyView">
          <div #viewPortContainer 
               tabIndex="0" 
-              (keyDown)="onViewportKeydown()" 
-              (keyU)="onViewportKeyup()" 
-              (dblClick="onViewportDoubleClick()"   
-              (dragStart)="onViewportDragStart()" 
-              (dragEnd)="onViewportDragEnd()">
+              [keyDown]="onViewportKeydown" 
+              [keyUp]="onViewportKeyup" 
+              [dblClick]="onViewportDoubleClick"   
+              [dragStart]="onViewportDragStart" 
+              [dragEnd]="onViewportDragEnd">
               <Viewport
                   #viewport
                   [rowKey]="rowKey"
@@ -43,12 +43,12 @@
                   [getSubRowDetails]="getSubRowDetails()"
                   [rowGroupRenderer]="rowGroupRenderer"
                   [overScan]="overScan"
-                  (onScroll)="onScroll()"
-                  (onRows)="onRows()">
+                  [onScroll]="onScroll"
+                  [onRows]="onRows">
               </Viewport>
     </div>
     <div #emptyView
-        className="react-grid-Empty">
+        className="angular-grid-Empty">
         Empty View
     </div>
 </div>

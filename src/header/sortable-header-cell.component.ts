@@ -1,6 +1,6 @@
 import { Component, ChangeDetectionStrategy, Input, Output, EventEmitter } from '@angular/core';
 
-import { SortDirection } from '../shared';
+import { Column, SortDirection } from '../shared';
 
 @Component({
     selector: 'sortable-header-cell',
@@ -9,6 +9,7 @@ import { SortDirection } from '../shared';
 })
 export class SortableHeaderCellComponent {
     @Input() columnKey: string;
+    @Input() column: Column;
     @Input() sortDirection: SortDirection;
 
     @Output() onSort: EventEmitter<any> = new EventEmitter();
@@ -22,17 +23,12 @@ export class SortableHeaderCellComponent {
     }
 
     getSortByText(): string {
-        switch (this.sortDirection) {
-            default:
-            case null:
-            case undefined:
-            case SortDirection.NONE:
-                return '';
-            case SortDirection.ASC:
-                return String.fromCharCode(9650);
-            case SortDirection.DESC:
-                return String.fromCharCode(9660);
-        }
+        const unicodeKeys = {
+            [SortDirection.ASC]: 9650,
+            [SortDirection.DESC]: 9660
+        };
+
+        return this.sortDirection === SortDirection.NONE ? '' : String.fromCharCode(unicodeKeys[this.sortDirection]);
     }
 
     onClick(): void {

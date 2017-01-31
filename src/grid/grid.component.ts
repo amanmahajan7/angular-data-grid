@@ -1,15 +1,15 @@
 import { Component, Input, Output, ChangeDetectionStrategy } from '@angular/core';
 
-import { CellMetadata, SortDirection } from '../shared';
+import { CellMetadata, SortDirection, Column } from '../shared';
 
 @Component({
     selector: 'grid',
     templateUrl: './grid.component.html',
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class BaseGridComponent {
+export class GridComponent {
     @Input() rowGetter: Function;
-    @Input() columns: Object | any[];
+    @Input() columns: Object | Column[];
     @Input() columnMetrics: Object;
     @Input() minHeight: number = 350;
     @Input() totalWidth: number | string;
