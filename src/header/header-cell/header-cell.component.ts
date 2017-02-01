@@ -17,6 +17,7 @@ type Style = {
 @Component({
     selector: 'header-cell',
     templateUrl: './header-cell.component.html',
+    styleUrls: ['./header-cell.component.css'],
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class HeaderCellComponent {
