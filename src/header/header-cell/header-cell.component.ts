@@ -1,6 +1,7 @@
 import { Component, Input, Output, ChangeDetectionStrategy } from '@angular/core';
 
 import { Column } from '../../shared';
+import { SimpleRenderer } from './simple-renderer.component';
 
 type Style = {
     width: number;
@@ -27,7 +28,6 @@ export class HeaderCellComponent {
     @Input() width: number;
     @Input() left: number;
     @Input() className: string;
-
     @Input() onResize: Function;
     @Input() onResizeEnd: Function;
 
@@ -55,10 +55,6 @@ export class HeaderCellComponent {
         let width = this.getWidthFromMouseEvent(e);
         this.onResizeEnd(this.column, width);
         this.resizing = false;
-    }
-
-    getCell(): void {
-
     }
 
     getStyle(): Style {

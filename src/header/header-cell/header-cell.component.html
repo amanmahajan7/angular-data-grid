@@ -6,4 +6,8 @@
             (dragEnd)="onDragEnd($event)"
         </resize-handle>
     </ng-container>
+    <ng-container *ngIf="rendered; else simpleRenderer"
+        *ngComponentOutlet="renderer">
+    </ng-container>
+    <simple-renderer #simpleRenderer [column]="column"></simple-renderer>
 </div>
