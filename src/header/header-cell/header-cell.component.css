@@ -28,10 +28,10 @@
   box-shadow: none;
 }
 
-.angular-grid-HeaderCell--resizing .angular-grid-HeaderCell__resizeHandle {
+.angular-grid-HeaderCell--resizing >>> .angular-grid-HeaderCell__resizeHandle {
   background: #dddddd;
 }
 
-.angular-grid-HeaderCell__draggable {
-    cursor: col-resize
+:host >>> .angular-grid-HeaderCell__draggable {
+    cursor: col-resize;
 }

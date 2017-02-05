@@ -1,22 +1,10 @@
 import { Component, Input, Output, ChangeDetectionStrategy } from '@angular/core';
 
-import { Column } from '../../shared';
+import { Column, HeaderCellType, Style, Klass } from '../../shared';
 import { SimpleRenderer } from './simple-renderer.component';
 
-type Style = {
-    width: number;
-    left: number;
-    display: string;
-    position: string;
-    overflow?: string;
-    height: number;
-    margin: number;
-    textOverflow: string;
-    whiteSpace: string
-}
-
 @Component({
-    selector: 'header-cell',
+    selector: 'adg-header-cell',
     templateUrl: './header-cell.component.html',
     styleUrls: ['./header-cell.component.css'],
     changeDetection: ChangeDetectionStrategy.OnPush
@@ -24,16 +12,16 @@ type Style = {
 export class HeaderCellComponent {
     @Input() renderer: Function;
     @Input() column: Column;
-    @Input() height: number;
-    @Input() width: number;
-    @Input() left: number;
+    @Input() type: HeaderCellType;
+    @Input() height: number | string;
     @Input() className: string;
     @Input() onResize: Function;
     @Input() onResizeEnd: Function;
 
+    types = HeaderCellType;
     private resizing: boolean = false;
 
-    onDragStart(e: DragEvent): void {
+    onDragStart(e: any): void {
         this.resizing = true;
         if (e && e.dataTransfer && e.dataTransfer.setData) {
             // need to set dummy data for FF
@@ -41,27 +29,27 @@ export class HeaderCellComponent {
         }
     }
 
-    onDrag(e: DragEvent): void {
+    onDrag(e: any): void {
         let resize = this.onResize || null;
         if (resize) {
-            let width = this.getWidthFromMouseEvent(e);
+            let width = e.left - this.column.left;
             if (width > 0) {
                 resize(this.column, width);
             }
         }
     }
 
-    onDragEnd(e: DragEvent): void {
-        let width = this.getWidthFromMouseEvent(e);
-        this.onResizeEnd(this.column, width);
+    onDragEnd(e: any): void {
+        // let width = this.getWidthFromMouseEvent(e);
+        // this.onResizeEnd(this.column, width);
         this.resizing = false;
     }
 
-    getStyle(): Style {
+    getStyles(): Style {
         return {
-            width: this.width,
+            'width.px': this.column.width,
+            'left.px': this.column.left,
             height: this.height,
-            left: this.left,
             display: 'inline-block',
             position: 'absolute',
             margin: 0,
@@ -70,12 +58,19 @@ export class HeaderCellComponent {
         };
     }
 
-    getClasses(): Object {
-        return {
+    getClasses(): Klass {
+        // TODO: optimize this
+        let classes = {
             'angular-grid-HeaderCell': true,
             'angular-grid-HeaderCell--resizing': this.resizing,
             'angular-grid-HeaderCell--locked': this.column.locked
         };
+
+        if (this.className) {
+            classes[this.className] = true;
+        }
+
+        return classes;
     }
 
     setScrollLeft(): void {

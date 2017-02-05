@@ -1,14 +1,12 @@
 <div>
     <div className="form-group">
         <ng-container *ngIf="column.filterable === false; else filterView">
-            <span/>
+            <span></span>
         </ng-container>
         <ng-container #filterView>
             <input type="text" 
-                data-key="header-filter-{{column.key}}" 
                 className="form-control input-sm" 
-                placeholder="Search" 
-                [formControl]="filterTerm" />
+                placeholder="Search" />
         </ng-container>
     </div>
 </div>

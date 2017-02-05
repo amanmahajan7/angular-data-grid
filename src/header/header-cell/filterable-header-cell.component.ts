@@ -3,10 +3,10 @@ import { FormControl } from '@angular/forms';
 import 'rxjs/add/operator/debounceTime';
 import 'rxjs/add/operator/distinctUntilChanged';
 
-import { Column, SortDirection } from '../../shared';
+import { Column } from '../../shared';
 
 @Component({
-    selector: 'filterable-header-cell',
+    selector: 'adg-filterable-header-cell',
     templateUrl: './filterable-header-cell.component.html',
     changeDetection: ChangeDetectionStrategy.OnPush
 })

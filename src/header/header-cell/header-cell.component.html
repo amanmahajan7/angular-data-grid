@@ -1,13 +1,13 @@
-<div [ngStyle]="getStyle()" [ngClass]="getClasses()">
-    <ng-container *ngIf="column.resizable">
-        <resize-handle 
-            (drag)="onDrag($event)" 
-            (dragStart)="onDragStart($event)" 
-            (dragEnd)="onDragEnd($event)"
-        </resize-handle>
+<div [ngStyle]="getStyles()" [ngClass]="getClasses()">
+    <ng-container [ngSwitch]="type">
+        <adg-sortable-header-cell *ngSwitchCase="types.SORTABLE" [column]="column"></adg-sortable-header-cell>
+        <adg-simple-renderer *ngSwitchCase="types.FILTERABLE" [column]="column"></adg-simple-renderer>
+        <adg-simple-renderer *ngSwitchDefault [column]="column"></adg-simple-renderer>
     </ng-container>
-    <ng-container *ngIf="rendered; else simpleRenderer"
-        *ngComponentOutlet="renderer">
-    </ng-container>
-    <simple-renderer #simpleRenderer [column]="column"></simple-renderer>
+    <adg-resize-handle 
+        *ngIf="column.resizable"
+        (drag)="onDrag($event)" 
+        (dragStart)="onDragStart($event)" 
+        (dragEnd)="onDragEnd($event)">
+    </adg-resize-handle>
 </div>

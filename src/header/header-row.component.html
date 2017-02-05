@@ -1,0 +1,8 @@
+<div class="angular-grid-HeaderRow">
+    <div [ngStyle]="getStyles()">
+        <adg-header-cell 
+            *ngFor="let column of columns" 
+            [column]="column" [type]="getHeaderCellType(column)">
+        </adg-header-cell>
+    </div>
+</div>

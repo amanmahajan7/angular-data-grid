@@ -1,4 +1,4 @@
-enum HeaderCellType {
+export enum HeaderCellType {
     SORTABLE,
     FILTERABLE,
     NONE,

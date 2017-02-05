@@ -9,8 +9,10 @@ import 'rxjs/add/operator/takeUntil';
 import 'rxjs/add/operator/do';
 import 'rxjs/add/operator/finally';
 
+import { Style } from '../../shared';
+
 @Component({
-    selector: 'resize-handle',
+    selector: 'adg-resize-handle',
     templateUrl: './resize-handle.component.html',
     changeDetection: ChangeDetectionStrategy.OnPush
 })
@@ -19,13 +21,13 @@ export class ResizeHandleComponent {
     @Output() dragEnd: EventEmitter<any> = new EventEmitter();
     @Output() drag: EventEmitter<any> = new EventEmitter();
 
-    get style(): Object {
+    get style(): Style {
         return {
             position: 'absolute',
-            top: 0,
-            right: 0,
-            width: 6,
-            height: '100%'
+            'top.px': 0,
+            'right.px': 0,
+            'width.px': 6,
+            'height.%': 100
         };
     }
 
@@ -52,9 +54,9 @@ export class ResizeHandleComponent {
     }
 
     private initMouseEvents(): void {
-        this.mouseup = fromEvent(this.el.nativeElement, 'mouseup');
         this.mousedown = fromEvent(this.el.nativeElement, 'mousedown');
         this.mousemove = fromEvent(this.document, 'mousemove');
+        this.mouseup = fromEvent(this.document, 'mouseup');
 
         this.mousedrag = this
             .mousedown
@@ -83,6 +85,6 @@ export class ResizeHandleComponent {
 
     private handleDrag(): void {
         this.mousedragSubscription =
-            this.mousedown.subscribe((coordinate: {}) => this.drag.emit(coordinate));
+            this.mousedrag.subscribe((coordinate: {}) => this.drag.emit(coordinate));
     }
 }

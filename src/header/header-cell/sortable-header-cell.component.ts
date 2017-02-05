@@ -1,9 +1,9 @@
 import { Component, ChangeDetectionStrategy, Input, Output, EventEmitter } from '@angular/core';
 
-import { Column, SortDirection } from '../../shared';
+import { Column, SortDirection, Style } from '../../shared';
 
 @Component({
-    selector: 'sortable-header-cell',
+    selector: 'adg-sortable-header-cell',
     templateUrl: './sortable-header-cell.component.html',
     changeDetection: ChangeDetectionStrategy.OnPush
 })
@@ -14,7 +14,7 @@ export class SortableHeaderCellComponent {
 
     @Output() onSort: EventEmitter<any> = new EventEmitter();
 
-    getClass(): Object {
+    getClasses(): Style {
         return {
             'angular-grid-HeaderCell-sortable': true,
             'angular-grid-HeaderCell-sortable--ascending': this.sortDirection === SortDirection.ASC,
