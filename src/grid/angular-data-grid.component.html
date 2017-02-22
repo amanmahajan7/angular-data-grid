@@ -1,0 +1,33 @@
+<div className="angular-grid-Container" [ngStyle]="getStyle()">
+    {toolbar}
+    <div className="angular-grid-Main">
+        <base-grid
+            #base
+            [rowKey]="rowKey"
+            [headerRows]="getHeaderRows()"
+            [columnMetrics]="columnMetrics"
+            [rowGetter]="rowGetter"
+            [rowsCount]="rowsCount"
+            [rowHeight]="rowHeight"
+            [cellMetaData]="cellMetaData"
+            [selectedRows]="getSelectedRows()"
+            [rowSelection]="getRowSelectionProps()"
+            [expandedRows]="expandedRows"
+            [rowOffsetHeight]="getRowOffsetHeight()"
+            [sortColumn]="sortColumn"
+            [sortDirection]="sortDirection"
+            [onSort]="onSort"
+            [minHeight]="minHeight"
+            [totalWidth]="gridWidth"
+            [onViewportKeydown]="onKeyDown"
+            [onViewportKeyup]="onKeyUp"
+            [onViewportDragStart]="onDragStart"
+            [onViewportDragEnd]="handleDragEnd"
+            [onViewportDoubleClick]="onViewportDoubleClick"
+            [onColumnResize]="onColumnResize"
+            [rowScrollTimeout]="rowScrollTimeout"
+            [contextMenu]="contextMenu"
+            [overScan]="overScan">
+        </base-grid>
+    </div>
+</div>

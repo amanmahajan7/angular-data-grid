@@ -1,14 +1,16 @@
 import { Component, Input, Output, ChangeDetectionStrategy } from '@angular/core';
 
 import { SortDirection, Column, CellMetadata, HeaderCellType, Style } from '../shared';
+import { GridService } from '../shared/grid.service';
 
 @Component({
     selector: 'adg-header-row',
     templateUrl: './header-row.component.html',
-    changeDetection: ChangeDetectionStrategy.OnPush
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    providers: [GridService] // TODO: MOVE IT TO GRID COMPONENT
 })
 export class HeaderRowComponent {
-    @Input() width: number | string;
+    @Input() width: number;
     @Input() height: number | string;
     @Input() columns: Column[];
     @Input() onColumnResize: Function;
@@ -26,28 +28,30 @@ export class HeaderRowComponent {
     @Input() rowType: string;
     @Input() draggableHeaderCell: Function;
 
+    constructor(private gridService: GridService) { }
+
     getHeaderCellType(column: Column): HeaderCellType {
         if (column.filterable) {
             if (this.filterable) {
-                return HeaderCellType.FILTERABLE
+                return HeaderCellType.Filterable
             };
         }
 
         if (column.sortable) {
-            return HeaderCellType.SORTABLE;
+            return HeaderCellType.Sortable;
         }
 
-        return HeaderCellType.NONE;
+        return HeaderCellType.None;
     }
 
-    getStyle(): Style {
-        return {
-            overflow: 'hidden',
-            'width.%': 100,
-            height: this.height,
-            position: 'absolute'
-        };
-    }
+    // getStyle(): Style {
+    //     return {
+    //         overflow: 'hidden',
+    //         'width.%': 100,
+    //         height: this.height,
+    //         position: 'absolute'
+    //     };
+    // }
 
     getCells(): any {
         let cells: any = [];
@@ -66,8 +70,7 @@ export class HeaderRowComponent {
 
     getStyles(): Style {
         return {
-            // width: this.width ? (this.width + getScrollbarSize()) : '100%',
-            width: this.width ? (this.width) : '100%',
+            width: this.width ? ((this.width + this.gridService.getScrollbarSize()) + 'px') : '100%',
             height: this.height,
             whiteSpace: 'nowrap',
             overflowX: 'hidden',

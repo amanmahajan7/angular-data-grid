@@ -1,7 +1,7 @@
 <div [ngStyle]="getStyles()" [ngClass]="getClasses()">
     <ng-container [ngSwitch]="type">
         <adg-sortable-header-cell *ngSwitchCase="types.SORTABLE" [column]="column"></adg-sortable-header-cell>
-        <adg-simple-renderer *ngSwitchCase="types.FILTERABLE" [column]="column"></adg-simple-renderer>
+        <adg-filterable-header-cell *ngSwitchCase="types.FILTERABLE" [column]="column"></adg-filterable-header-cell>
         <adg-simple-renderer *ngSwitchDefault [column]="column"></adg-simple-renderer>
     </ng-container>
     <adg-resize-handle 

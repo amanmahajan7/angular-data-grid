@@ -1,6 +1,6 @@
 export enum HeaderCellType {
-    SORTABLE,
-    FILTERABLE,
-    NONE,
-    CHECKBOX
+    None,
+    Sortable,
+    Filterable,
+    Checkbox
 }

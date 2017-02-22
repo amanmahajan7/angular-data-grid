@@ -17,18 +17,18 @@ export class SortableHeaderCellComponent {
     getClasses(): Style {
         return {
             'angular-grid-HeaderCell-sortable': true,
-            'angular-grid-HeaderCell-sortable--ascending': this.sortDirection === SortDirection.ASC,
-            'angular-grid-HeaderCell-sortable--descending': this.sortDirection === SortDirection.DESC
+            'angular-grid-HeaderCell-sortable--ascending': this.sortDirection === SortDirection.Asc,
+            'angular-grid-HeaderCell-sortable--descending': this.sortDirection === SortDirection.Desc
         };
     }
 
     getSortByText(): string {
         const unicodeKeys = {
-            [SortDirection.ASC]: 9650,
-            [SortDirection.DESC]: 9660
+            [SortDirection.Asc]: 9650,
+            [SortDirection.Desc]: 9660
         };
 
-        return this.sortDirection === SortDirection.NONE ? '' : String.fromCharCode(unicodeKeys[this.sortDirection]);
+        return this.sortDirection === SortDirection.None ? '' : String.fromCharCode(unicodeKeys[this.sortDirection]);
     }
 
     onClick(): void {
@@ -37,14 +37,14 @@ export class SortableHeaderCellComponent {
             default:
             case null:
             case undefined:
-            case SortDirection.NONE:
-                direction = SortDirection.ASC;
+            case SortDirection.None:
+                direction = SortDirection.Asc;
                 break;
-            case SortDirection.ASC:
-                direction = SortDirection.DESC;
+            case SortDirection.Asc:
+                direction = SortDirection.Desc;
                 break;
-            case SortDirection.DESC:
-                direction = SortDirection.NONE;
+            case SortDirection.Desc:
+                direction = SortDirection.None;
                 break;
         }
 

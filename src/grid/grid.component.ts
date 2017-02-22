@@ -1,9 +1,9 @@
 import { Component, Input, Output, ChangeDetectionStrategy } from '@angular/core';
 
-import { CellMetadata, SortDirection, Column } from '../shared';
+import { CellMetadata, SortDirection, Column, Style } from '../shared';
 
 @Component({
-    selector: 'grid',
+    selector: 'adg-base',
     templateUrl: './grid.component.html',
     changeDetection: ChangeDetectionStrategy.OnPush
 })
@@ -48,7 +48,7 @@ export class GridComponent {
         return this.rowsCount >= 1 || (this.rowsCount === 0 && !this.emptyRowsView);
     }
 
-    private getStyle(): { overflow: string; outline: number; position: string; minHeight: number; } {
+    getStyle(): Style {
         return {
             overflow: 'hidden',
             outline: 0,

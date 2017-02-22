@@ -9,7 +9,7 @@
         [sortColumn]="sortColumn"
         [sortDirection]="sortDirection"
         [draggableHeaderCell]="draggableHeaderCell"
-        [onColumnResize]="onColumnResize()"
+        [onColumnResize]="onColumnResize"
         [onSort]="onSort"
         [onScroll]="onHeaderScroll"
         [getValidFilterValues]="getValidFilterValues">
@@ -17,11 +17,11 @@
     <div *ngIf="hasRows(); else emptyView">
          <div #viewPortContainer 
               tabIndex="0" 
-              [keyDown]="onViewportKeydown" 
-              [keyUp]="onViewportKeyup" 
-              [dblClick]="onViewportDoubleClick"   
-              [dragStart]="onViewportDragStart" 
-              [dragEnd]="onViewportDragEnd">
+              [onKeyDown]="onViewportKeydown" 
+              [onkeyUp]="onViewportKeyup" 
+              [onDoubleClick]="onViewportDoubleClick"   
+              [onDragStart]="onViewportDragStart" 
+              [onDragEnd]="onViewportDragEnd">
               <Viewport
                   #viewport
                   [rowKey]="rowKey"
@@ -40,7 +40,7 @@
                   [rowScrollTimeout]="rowScrollTimeout"
                   [contextMenu]="contextMenu"
                   [rowSelection]="rowSelection"
-                  [getSubRowDetails]="getSubRowDetails()"
+                  [getSubRowDetails]="getSubRowDetails"
                   [rowGroupRenderer]="rowGroupRenderer"
                   [overScan]="overScan"
                   [onScroll]="onScroll"

@@ -5,3 +5,5 @@ export * from './row-data.model';
 export * from './sort-direction.model';
 export * from './header-cell-type.model';
 export * from './ng.model';
+export * from './cell-navigation-mode.model';
+export * from './update-action.model';

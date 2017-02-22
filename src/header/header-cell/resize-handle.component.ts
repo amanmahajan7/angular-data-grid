@@ -21,16 +21,6 @@ export class ResizeHandleComponent {
     @Output() dragEnd: EventEmitter<any> = new EventEmitter();
     @Output() drag: EventEmitter<any> = new EventEmitter();
 
-    get style(): Style {
-        return {
-            position: 'absolute',
-            'top.px': 0,
-            'right.px': 0,
-            'width.px': 6,
-            'height.%': 100
-        };
-    }
-
     // drag: Object = null;
 
     private mouseup: Observable<any>;
@@ -51,6 +41,16 @@ export class ResizeHandleComponent {
 
     ngOnDestroy(): void {
         this.mousedragSubscription.unsubscribe();
+    }
+
+    getStyles(): Style {
+        return {
+            position: 'absolute',
+            'top.px': 0,
+            'right.px': 0,
+            'width.px': 6,
+            'height.%': 100
+        };
     }
 
     private initMouseEvents(): void {
